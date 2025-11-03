@@ -46,8 +46,8 @@ conda activate garage_2
 
 Before running the code, you will need to add the following paths to PYTHONPATH on your system:
 ```Shell
-export CARLA_ROOT=/path/to/CARLA/root
-export WORK_DIR=/path/to/carla_garage
+export CARLA_ROOT=./carla
+export WORK_DIR=.
 export PYTHONPATH=$PYTHONPATH:${CARLA_ROOT}/PythonAPI/carla
 export SCENARIO_RUNNER_ROOT=${WORK_DIR}/scenario_runner
 export LEADERBOARD_ROOT=${WORK_DIR}/leaderboard

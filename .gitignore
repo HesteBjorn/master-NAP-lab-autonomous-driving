@@ -21,6 +21,11 @@ test/
 *.sif
 *.png
 
+carla
+team_code/checkpoints
+node_modules
+own_code/checkpoints
+
 data/1_scenario_per_route_rm_unmanageable_v5/
 data/1_scenario_per_route_v5/
 data/no_scenario_v5/
