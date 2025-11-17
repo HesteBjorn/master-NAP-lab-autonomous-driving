@@ -1,13 +1,32 @@
 #!/usr/bin/env bash
 
 # Sets up the environment for running TransFuser++ inference.
-# Usage: source own_code/setup_env.sh [--start-carla]
+# Usage: source own_code/setup_env.sh [--start-carla] [--enable-debug]
 # Tips:
 #   - Source this script from your shell so that the exports persist:
 #       source own_code/setup_env.sh
 #   - Add the optional --start-carla flag to spawn a CARLA server in a new terminal.
 
 set -euo pipefail
+
+START_CARLA=false
+ENABLE_DEBUG=false
+
+while (($#)); do
+  case "$1" in
+    --start-carla)
+      START_CARLA=true
+      ;;
+    --enable-debug)
+      ENABLE_DEBUG=true
+      ;;
+    *)
+      echo "Unknown option: $1" >&2
+      return 1
+      ;;
+  esac
+  shift
+done
 
 # Ensure the script is sourced, otherwise environment changes would be lost.
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
@@ -117,7 +136,15 @@ start_carla_server() {
   return 1
 }
 
-if [[ "${1:-}" == "--start-carla" ]]; then
+if ${ENABLE_DEBUG}; then
+  DEBUG_OUTPUT_DIR="${WORK_DIR}/outputs/debug_visualizations"
+  mkdir -p "${DEBUG_OUTPUT_DIR}"
+  export DEBUG_CHALLENGE=1
+  export SAVE_PATH="${DEBUG_OUTPUT_DIR}"
+  echo "Debug visualizations enabled. SAVE_PATH=${SAVE_PATH}"
+fi
+
+if ${START_CARLA}; then
   start_carla_server || true
 fi
 
