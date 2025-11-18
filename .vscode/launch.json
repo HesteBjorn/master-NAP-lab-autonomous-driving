@@ -1,0 +1,41 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Short TransFuser Train",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/team_code/train.py",
+      "console": "integratedTerminal",
+      "env": {
+        "CARLA_ROOT": "${workspaceFolder}/carla",
+        "PYTHONPATH": "${workspaceFolder}:${workspaceFolder}/carla/PythonAPI:${workspaceFolder}/carla/PythonAPI/carla:${env:PYTHONPATH}",
+        "RANK": "0",
+        "WORLD_SIZE": "1",
+        "LOCAL_RANK": "0",
+        "TORCH_INIT_METHOD": "file://${workspaceFolder}/.torch_init_debug",
+        "OMP_NUM_THREADS": "8",
+        "OPENBLAS_NUM_THREADS": "1"
+      },
+      "args": [
+        "--id", "short_debug_vscode_stage2",
+        "--epochs", "5",
+        "--batch_size", "4",
+        "--lr", "1.875e-4",
+        "--setting", "all",
+        "--root_dir", "${workspaceFolder}/data_short",
+        "--logdir", "${workspaceFolder}/outputs/debug_short",
+        "--cpu_cores", "8",
+        "--train_sampling_rate", "25",
+        "--num_repetitions", "1",
+        // Stage 1:
+        // "--use_controller_input_prediction", "0",
+        // Stage 2:
+        "--use_controller_input_prediction", "1",
+        "--continue_epoch", "0",
+        "--load_file", "${workspaceFolder}/outputs/debug_short/short_debug_vscode2/model_0004.pth"
+      ],
+      "justMyCode": false
+    }
+  ]
+}

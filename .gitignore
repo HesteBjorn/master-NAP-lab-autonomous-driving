@@ -26,6 +26,8 @@ team_code/checkpoints
 node_modules
 own_code/checkpoints
 
+
+data_short/
 data/1_scenario_per_route_rm_unmanageable_v5/
 data/1_scenario_per_route_v5/
 data/no_scenario_v5/
@@ -40,7 +42,7 @@ logsTD
 database_org
 outputs
 lidar*
-launch.json
+# launch.json
 launch2.json
 
 # Byte-compiled / optimized / DLL files
