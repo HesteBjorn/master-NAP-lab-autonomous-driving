@@ -43,7 +43,7 @@ GPU_RANK=0
 PLANNER_TYPE="traj"
 BASE_PORT=30000
 BASE_TM_PORT=50000
-SAVE_DIR_NAME="eval_bench2drive3_short"
+SAVE_DIR_NAME="../outputs/eval_bench2drive3_short"  # put in outputs folder
 BASE_CHECKPOINT_NAME="eval_bench2drive3_short"
 
 while [[ $# -gt 0 ]]; do

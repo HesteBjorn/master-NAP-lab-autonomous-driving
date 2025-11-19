@@ -367,7 +367,7 @@ class LeaderboardEvaluator(object):
             self.agent_instance = agent_class_obj(args.host, args.port, args.debug)
             self.agent_instance.set_global_plan(self.route_scenario.gps_route, self.route_scenario.route)
             args.agent_config = args.agent_config + '+' + save_name
-            self.agent_instance.setup(args.agent_config)
+            self.agent_instance.setup(args.agent_config, save_name)
 
             # Check and store the sensors
             if not self.sensors:
