@@ -4,7 +4,7 @@
 #SBATCH --account=ie-idi
 #SBATCH --output=short_train_2gpu_%j.log
 #SBATCH --error=short_train_2gpu_%j.errx
-#SBATCH --time=00:15:00
+#SBATCH --time=00:30:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --gres=gpu:2
