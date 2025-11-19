@@ -5,7 +5,7 @@
 #SBATCH --time=00:01:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
-#SBATCH --gres=gpu:v100:2   # Keep the GPU Type I want.
+#SBATCH --gres=gpu:v100:1   # Keep the GPU Type I want.
 #SBATCH --cpus-per-task=8
 
 # IMPORTANT: Start this script from within team_code folder, otherwise it will not work
