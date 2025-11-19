@@ -34,7 +34,6 @@ echo "Total of $SLURM_NTASKS cores"
 module purge # Enable on idun
 module load Anaconda3/2024.02-1  # Enable on idun
 # source ~/miniconda3/etc/profile.d/conda.sh  # DISABLE on IDUN
-conda env --list
 conda activate garage_2
 echo WORKDIR is $WORKDIR
 which python
@@ -67,7 +66,7 @@ echo $CARLA_ROOT
 # ./download_short_data.sh
 # cd ${WORKDIR}
 
-torchrun --nnodes=$SLURM_NNODES --nproc_per_node=2 --max_restarts=0 \
+torchrun --nnodes=$SLURM_NNODES --nproc_per_node=1 --max_restarts=0 \
   --rdzv_backend=c10d --rdzv_endpoint="$HOSTNAME:29500" \
   train.py \
   --id short_debug_slurm_${SLURM_JOB_ID} \
