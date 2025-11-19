@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=short_train
-#SBATCH --partition=short
+#SBATCH --partition=GPUQ
 #SBATCH --account=ie-idi
 #SBATCH --output=short_train_%j.log
 #SBATCH --error=short_train_%j.errx
@@ -58,23 +58,24 @@ export OPENBLAS_NUM_THREADS=1
 echo $PYTHONPATH
 echo $CARLA_ROOT
 
-cd ${PROJECT_ROOT}/tools
-cat download_short_data.sh
-./download_short_data.sh
-cd ${WORKDIR}
+# # Download short dat if not already present
+# cd ${PROJECT_ROOT}/tools
+# cat download_short_data.sh
+# ./download_short_data.sh
+# cd ${WORKDIR}
 
-# torchrun --nnodes=$SLURM_NNODES --nproc_per_node=2 --max_restarts=0 \
-#   --rdzv_backend=c10d --rdzv_endpoint="$HOSTNAME:29500" \
-#   train.py \
-#   --id short_debug_slurm_${SLURM_JOB_ID} \
-#   --epochs 2 \
-#   --batch_size 4 \
-#   --lr 3e-4 \
-#   --use_cosine_schedule 1 \
-#   --cosine_t0 1 \
-#   --setting all \
-#   --root_dir ../data_short/ \
-#   --logdir ../outputs/debug_short \
-#   --cpu_cores 8 \
-#   --num_repetitions 1 \
-#   --use_controller_input_prediction 1  # Do everything single-stage
+torchrun --nnodes=$SLURM_NNODES --nproc_per_node=2 --max_restarts=0 \
+  --rdzv_backend=c10d --rdzv_endpoint="$HOSTNAME:29500" \
+  train.py \
+  --id short_debug_slurm_${SLURM_JOB_ID} \
+  --epochs 2 \
+  --batch_size 4 \
+  --lr 3e-4 \
+  --use_cosine_schedule 1 \
+  --cosine_t0 1 \
+  --setting all \
+  --root_dir ../data_short/ \
+  --logdir ../outputs/debug_short \
+  --cpu_cores 8 \
+  --num_repetitions 1 \
+  --use_controller_input_prediction 1  # Do everything single-stage
