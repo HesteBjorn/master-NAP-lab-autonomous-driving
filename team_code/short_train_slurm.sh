@@ -2,7 +2,7 @@
 #SBATCH --job-name=short_train
 #SBATCH --output=short_train_%j.log
 #SBATCH --error=short_train_%j.errx
-#SBATCH --TIME=0-01:00
+#SBATCH --time=00:01:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --gres=gpu:v100:2   # Keep the GPU Type I want.
