@@ -1,9 +1,10 @@
 #!/bin/bash
 #SBATCH --job-name=short_train
 #SBATCH --partition=short
+#SBATCH --account=ie-idi
 #SBATCH --output=short_train_%j.log
 #SBATCH --error=short_train_%j.errx
-#SBATCH --time=00:01:00
+#SBATCH --time=00:15:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --gres=gpu:1
