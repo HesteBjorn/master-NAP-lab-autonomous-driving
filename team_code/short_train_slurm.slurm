@@ -10,6 +10,9 @@
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=8
 
+#SBATCH --mail-user=erikhbj@stud.ntnu.no
+#SBATCH --mail-type=ALL
+
 # IMPORTANT: Start this script from within team_code folder, otherwise it will not work
 
 # print info about current job
