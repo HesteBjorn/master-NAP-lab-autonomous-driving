@@ -2,12 +2,12 @@
 #SBATCH --job-name=short_train
 #SBATCH --partition=GPUQ
 #SBATCH --account=ie-idi
-#SBATCH --output=short_train_%j.log
-#SBATCH --error=short_train_%j.errx
+#SBATCH --output=short_train_2gpu_%j.log
+#SBATCH --error=short_train_2gpu_%j.errx
 #SBATCH --time=00:15:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
-#SBATCH --gres=gpu:1
+#SBATCH --gres=gpu:2
 #SBATCH --cpus-per-task=8
 
 #SBATCH --mail-user=erikhbj@stud.ntnu.no
@@ -66,7 +66,7 @@ echo $CARLA_ROOT
 # ./download_short_data.sh
 # cd ${WORKDIR}
 
-torchrun --nnodes=$SLURM_NNODES --nproc_per_node=1 --max_restarts=0 \
+torchrun --nnodes=$SLURM_NNODES --nproc_per_node=2 --max_restarts=0 \
   --rdzv_backend=c10d --rdzv_endpoint="$HOSTNAME:29500" \
   train.py \
   --id short_debug_slurm_${SLURM_JOB_ID} \
