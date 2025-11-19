@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=short_train
-#SBATCH --partition=SHORT
+#SBATCH --partition=short
 #SBATCH --output=short_train_%j.log
 #SBATCH --error=short_train_%j.errx
 #SBATCH --time=00:01:00
