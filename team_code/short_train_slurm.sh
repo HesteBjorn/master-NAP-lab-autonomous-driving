@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 #SBATCH --job-name=short_train
 #SBATCH --output=short_train_%j.log
 #SBATCH --error=short_train_%j.errx
@@ -52,6 +52,10 @@ export OPENBLAS_NUM_THREADS=1
 
 echo $PYTHONPATH
 echo $CARLA_ROOT
+
+cd ../tools
+cat download_short_data.sh
+./download_short_data.sh
 
 # torchrun --nnodes=$SLURM_NNODES --nproc_per_node=2 --max_restarts=0 \
 #   --rdzv_backend=c10d --rdzv_endpoint="$HOSTNAME:29500" \
