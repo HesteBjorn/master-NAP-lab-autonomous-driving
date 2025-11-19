@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=short_train
+#SBATCH --job-name=short_train_2GPU
 #SBATCH --partition=GPUQ
 #SBATCH --account=ie-idi
 #SBATCH --output=short_train_2gpu_%j.log
