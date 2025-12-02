@@ -21,6 +21,5 @@ torchrun --nnodes=1 --nproc_per_node=1 --max_restarts=1 \
   --root_dir /home/erikhbj/Documents/master/master-NAP-lab-autonomous-driving/data_short/ \
   --logdir /home/erikhbj/Documents/master/master-NAP-lab-autonomous-driving/outputs/debug_short \
   --cpu_cores 8 \
-  --train_sampling_rate 25 \
   --num_repetitions 1 \
   --use_controller_input_prediction 0

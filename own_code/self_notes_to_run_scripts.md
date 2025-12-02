@@ -22,6 +22,21 @@ Run with video:
     --fps 12`
 
 
+Convert an existing scenario route png debug folder (generated if ran with `own_code/setup_env.sh --enable-debug`):
+
+`python own_code/vis_to_video.py --frames outputs/debug_visualizations/[foldername] --fps 12`
+
+<!-- ex: python own_code/vis_to_video.py --frames outputs/eval_bench2drive3_short/RouteScenario_3093_rep0_Town12_CrossingBicycleFlow_1_19_11_10_18_22_31 --fps 12 -->
+
+Convert all routes from folder:
+
+`
+for d in outputs/eval_bench2drive22_medium/*/; do
+  [ -d "$d" ] || continue
+  python own_code/vis_to_video.py --frames "$d" --fps 12
+done`
+
+
 If VScode exits the terminal and out need crash output, pipe command with `|| read -p "Press enter to continue"`
 
 
