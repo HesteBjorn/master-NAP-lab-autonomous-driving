@@ -38,6 +38,8 @@ fi
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 WORK_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
 CARLA_ROOT="${WORK_DIR}/carla"
+SCENARIO_RUNNER_ROOT="${WORK_DIR}/scenario_runner"
+LEADERBOARD_ROOT="${WORK_DIR}/leaderboard"
 CONDA_ENV="garage_2"
 
 maybe_source_conda() {
@@ -84,11 +86,13 @@ fi
 
 export WORK_DIR
 export CARLA_ROOT
+export SCENARIO_RUNNER_ROOT
+export LEADERBOARD_ROOT
 
 PYTHONPATH_ENTRIES=(
   "${CARLA_ROOT}/PythonAPI/carla"
-  "${WORK_DIR}/scenario_runner"
-  "${WORK_DIR}/leaderboard"
+  "${SCENARIO_RUNNER_ROOT}"
+  "${LEADERBOARD_ROOT}"
   "${WORK_DIR}/own_code"
 )
 
@@ -151,3 +155,5 @@ fi
 echo "Environment ready. Conda env: ${CONDA_ENV}"
 echo "WORK_DIR=${WORK_DIR}"
 echo "CARLA_ROOT=${CARLA_ROOT}"
+echo "SCENARIO_RUNNER_ROOT=${SCENARIO_RUNNER_ROOT}"
+echo "LEADERBOARD_ROOT=${LEADERBOARD_ROOT}"
