@@ -59,7 +59,7 @@ Inspect losses from tensorboard:
 
 Run local eval on 3 Bench2Drive routes (after setup_env):
 
-`bash Bench2Drive/leaderboard/scripts/run_evaluation_short.sh  \
+`bash Bench2Drive/leaderboard/scripts/run_evaluation_full.sh  \
     --agent team_code/sensor_agent.py \
     --config own_code/checkpoints/tfpp_all_towns_seed0 \
     --gpu 0 || read -p "enter to continue"`
