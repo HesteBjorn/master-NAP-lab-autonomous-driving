@@ -40,7 +40,7 @@ data_hdd
 ALL_ROUTES
 logsTD
 database_org
-outputs
+# outputs
 lidar*
 # launch.json
 launch2.json
