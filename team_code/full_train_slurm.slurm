@@ -1,15 +1,16 @@
 #!/bin/bash
-#SBATCH --job-name=short_train_2GPU
+#SBATCH --job-name=full_train_attn
 #SBATCH --partition=GPUQ
 #SBATCH --account=ie-idi
-#SBATCH --output=short_train_2gpu_%j.log
-#SBATCH --error=short_train_2gpu_%j.errx
-#SBATCH --time=00:30:00
+#SBATCH --output=full_train_attn_%j.log
+#SBATCH --error=full_train_attn_%j.err
+#SBATCH --time=10-00:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
-#SBATCH --gres=gpu:2
+#SBATCH --gres=gpu:4
+#SBATCH --constraint=a100
 #SBATCH --mem=64G
-#SBATCH --cpus-per-task=8
+#SBATCH --cpus-per-task=32
 
 #SBATCH --mail-user=erikhbj@stud.ntnu.no
 #SBATCH --mail-type=ALL
@@ -55,7 +56,7 @@ export MASTER_ADDR=localhost
 export NCCL_DEBUG=INFO
 
 
-export OMP_NUM_THREADS=8
+export OMP_NUM_THREADS=32
 export OPENBLAS_NUM_THREADS=1
 
 echo $PYTHONPATH
@@ -67,19 +68,30 @@ echo $CARLA_ROOT
 # ./download_short_data.sh
 # cd ${WORKDIR}
 
-torchrun --nnodes=$SLURM_NNODES --nproc_per_node=2 --max_restarts=0 \
+torchrun --nnodes=$SLURM_NNODES --nproc_per_node=4 --max_restarts=0 \
   --rdzv_backend=c10d --rdzv_endpoint="$HOSTNAME:29500" \
   train.py \
-  --id short_debug_slurm_${SLURM_JOB_ID} \
-  --epochs 2 \
-  --batch_size 4 \
+  --id full_train_attn_${SLURM_JOB_ID} \
+  --epochs 31 \
+  --batch_size 16 \
   --lr 3e-4 \
   --use_cosine_schedule 1 \
   --cosine_t0 1 \
   --setting all \
-  --root_dir ../data_short/ \
-  --logdir ../outputs/debug_short \
-  --cpu_cores 8 \
+  --tp_attention 1 \
+  --root_dir /cluster/projects/vc/data/ad/open/TransFuserPlusPlus/leaderboard_2 \
+  --logdir ../outputs/full_train \
+  --cpu_cores 32 \
   --num_repetitions 1 \
   --use_controller_input_prediction 0  # First stage
-  # --use_controller_input_prediction 1  # Second stage
+  # --use_controller_input_prediction 1  # Second stage \
+  # --continue_epoch 0 \
+  # --load_file ../outputs/full_train/full_train_attn_XXXX/model_XXX.pth
+
+
+## TODO: ASK GPT:
+# Double check the tp_attention and explain all of its consequences. Try to look for alternatives to re-implementing the transformer from scratch.
+### Prompt: Thoroughly look through the tp_attention flag from train.py / config and explain me what it does. I want to know the entire flow and everywhere where the parameter influences the running code and architecture. I want to know the difference in detail in what is changed when it is turned on. When the architecture changes, how different will it be? What is the differences? What difference will it make in practice? Does the code and the architecture change work? Think through your answer thoroughly, and evaluate your correctness before stating the solution to me.
+
+# # AND:
+# Look through my training script, and ensure everything is correct. And make sure it fits my gpu setups etc. Look for potential failure ases
