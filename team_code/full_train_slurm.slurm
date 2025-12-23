@@ -4,7 +4,7 @@
 #SBATCH --account=ie-idi
 #SBATCH --output=full_train_attn_%j.log
 #SBATCH --error=full_train_attn_%j.err
-#SBATCH --time=10-00:00:00
+#SBATCH --time=0-00:30:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --gres=gpu:4
