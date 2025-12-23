@@ -68,8 +68,11 @@ echo $CARLA_ROOT
 # ./download_short_data.sh
 # cd ${WORKDIR}
 
+MASTER_PORT=$((29500 + SLURM_JOB_ID % 1000))
+echo "MASTER PORT is $HOSTNAME:$MASTER_PORT"
+
 torchrun --nnodes=$SLURM_NNODES --nproc_per_node=4 --max_restarts=0 \
-  --rdzv_backend=c10d --rdzv_endpoint="$HOSTNAME:29500" \
+  --rdzv_backend=c10d --rdzv_endpoint="$HOSTNAME:$MASTER_PORT" \
   train.py \
   --id full_train_attn_${SLURM_JOB_ID} \
   --epochs 31 \
